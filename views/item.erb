@@ -1,0 +1,11 @@
+<h1>Item</h1>
+
+<div class="item">
+	<img src="<%= @item.image_url %>" alt="">
+	<h1><%= @item.name %></h1>
+	<p><%= @item.price %> Schmeckles</p>
+	<p><%= @item.description %></p>
+	<form action="/cart/add" method="post">
+		<button>Add to cart</button>
+	</form>
+</div>

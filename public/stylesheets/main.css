@@ -1,0 +1,38 @@
+/***********/
+/* GENERAL */
+/***********/
+
+
+/*************/
+/* INVENTORY */
+/*************/
+
+.inventory_list {
+	padding: 0;
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+}
+
+.inventory_list li {
+	list-style: none;
+
+}
+
+.inventory_list li a {
+	text-decoration: none;
+	display: flex;
+	flex-direction: column;
+}
+
+.inventory_list li a img {
+	width: 200px;
+}
+
+/********/
+/* ITEM */
+/********/
+
+.item img {
+	width: 200px;
+}
