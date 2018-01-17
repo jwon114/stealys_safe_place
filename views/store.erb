@@ -3,7 +3,7 @@
 <ul class="inventory_list">
 	<% @inventory_list.each do |item| %>
 		<li>
-			<a href="/item/<%= item.id %>">
+			<a href="/items/<%= item.id %>">
 				<img src="<%= item.image_url%>" alt="">
 				<%= item.name %>
 			</a>

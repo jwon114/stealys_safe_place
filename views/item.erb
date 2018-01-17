@@ -1,11 +1,48 @@
 <h1>Item</h1>
+<form action="/store">
+	<button>Back to browsing</button>
+</form>
 
 <div class="item">
 	<img src="<%= @item.image_url %>" alt="">
 	<h1><%= @item.name %></h1>
 	<p><%= @item.price %> Schmeckles</p>
+	<p>In stock: <%= @item.quantity %></p>
 	<p><%= @item.description %></p>
 	<form action="/cart/add" method="post">
+		<label for="">Quantity</label>
+		<input name="quantity" type="text">
 		<button>Add to cart</button>
 	</form>
+	<div class="reviews_container">
+		<div class="reviews">
+			<ul>
+				<% if @reviews_list %>
+					<% @reviews_list.each do |record| %>
+						<li>
+							<p><%= record.review %></p>
+							<p><%= record.user.name%></p>
+								
+						</li>
+					<% end %>
+				<% end %>
+			</ul>
+		</div>
+		<% if logged_in? %>
+			<form action="/reviews/<%= @item.id %>" method="post">
+				<textarea name="review" id="" cols="30" rows="5" placeholder="Add a review"></textarea>
+				<button>Submit Review</button>
+				<label name="star1" type="radio"></label>
+				<input name="star1" type="radio">
+				<label name="star2" type="radio"></label>
+				<input name="star2" type="radio">
+				<label name="star3" type="radio"></label>
+				<input name="star3" type="radio">
+				<label name="star4" type="radio"></label>
+				<input name="star4" type="radio">
+				<label name="star5" type="radio"></label>
+				<input name="star5" type="radio">
+			</form>
+		<% end %>
+	</div>
 </div>
