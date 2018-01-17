@@ -1,5 +1,4 @@
 $(document).ready(function() {
-	console.log('script loaded');
 
 	$('#addToCart').on('click', function(event) {
 		// stop refresh of page after post submission on form
@@ -17,6 +16,4 @@ $(document).ready(function() {
 			}
 		});
 	});
-
-	
 });

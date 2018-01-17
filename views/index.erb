@@ -1,18 +1,22 @@
-<h1>Stealys Safe Place</h1>
+<div class="box">
+	<h1 class="main_title">Stealys Safe Place</h1>
 
-<form action="/store">
-	<button>Browse</button>
-</form>
+	<form class="browse" action="/store">
+		<button>Browse</button>
+	</form>
 
-<h2>Customer Login</h2>
-<form action="/session" method="post">
-	<label for="">Email</label>
-	<input name="email" type="text">
-	<label for="">Password</label>
-	<input name="password" type="password">
-	<button>Login</button>
-</form>
+	<div class="index_container">
+		<h2>Customer Login</h2>
+		<form class="login" action="/session" method="post">
+			<label for="">Email</label>
+			<input name="email" type="text">
+			<label for="">Password</label>
+			<input name="password" type="password">
+			<button>Login</button>
+		</form>
 
-<form action="/users/new">
-	<button>Create New User</button>
-</form>
+		<form action="/users/new">
+			<button>Create New User</button>
+		</form>
+	</div>
+</div>
