@@ -36,9 +36,6 @@ get '/' do
 	erb :index
 end
 
-get '/login' do
-	erb :login
-end
 
 post '/session' do
 	user = User.find_by(email: params[:email])
@@ -54,6 +51,10 @@ end
 delete '/session' do
 	session[:user_id] = nil
 	redirect '/'
+end
+
+get '/users/login' do
+	erb :login
 end
 
 get '/users/new' do

@@ -24,8 +24,8 @@ CREATE TABLE carts (
 	inventory_id INTEGER NOT NULL,
 	quantity INTEGER NOT NULL,
 	user_id INTEGER NOT NULL,
-	FOREIGN KEY (inventory_id) REFERENCES inventories (id) ON DELETE RESTRICT,
-	FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE RESTRICT
+	FOREIGN KEY (inventory_id) REFERENCES inventories (id) ON DELETE CASCADE,
+	FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
 CREATE TABLE reviews (
@@ -34,6 +34,6 @@ CREATE TABLE reviews (
 	user_id INTEGER NOT NULL,
 	review TEXT,
 	rating INTEGER,
-	FOREIGN KEY (inventory_id) REFERENCES inventories (id) ON DELETE RESTRICT,
-	FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE RESTRICT
+	FOREIGN KEY (inventory_id) REFERENCES inventories (id) ON DELETE CASCADE,
+	FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
