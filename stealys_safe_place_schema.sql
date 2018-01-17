@@ -1,22 +1,22 @@
-DROP TABLE IF EXISTS inventories;
+DROP TABLE IF EXISTS reviews;
 DROP TABLE IF EXISTS carts;
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS reviews;
+DROP TABLE IF EXISTS inventories;
 
 CREATE TABLE inventories (
 	id SERIAL PRIMARY KEY,
 	name VARCHAR(300) NOT NULL,
-	description VARCHAR(600),
-	price INTEGER,
+	description TEXT,
+	price INTEGER DEFAULT 0,
 	quantity INTEGER NOT NULL,
-	image_url VARCHAR(600)
+	image_url TEXT
 );
 
 CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
 	name VARCHAR(300),
 	email VARCHAR(300) NOT NULL,
-	password_digest VARCHAR(600)
+	password_digest TEXT
 );
 
 CREATE TABLE carts (
@@ -32,7 +32,7 @@ CREATE TABLE reviews (
 	id SERIAL PRIMARY KEY,
 	inventory_id INTEGER NOT NULL,
 	user_id INTEGER NOT NULL,
-	review VARCHAR(600),
+	review TEXT,
 	rating INTEGER,
 	FOREIGN KEY (inventory_id) REFERENCES inventories (id) ON DELETE RESTRICT,
 	FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE RESTRICT

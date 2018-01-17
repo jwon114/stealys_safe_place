@@ -5,7 +5,10 @@ require_relative 'db_config'
 require_relative 'models/inventory'
 require_relative 'models/review'
 require_relative 'models/user'
+require_relative 'models/cart'
 require 'pry'
+
+MAX_ORDER = 10
 
 # TODO:
 # login.erb
@@ -21,6 +24,10 @@ helpers do
 
 	def logged_in?
 		!!current_user
+	end
+
+	def cart_has_item?(user_id, inventory_id)
+		return Cart.exists?(:inventory_id => inventory_id, :user_id => user_id)
 	end
 end
 
@@ -75,10 +82,16 @@ get '/store' do
 end
 
 get '/items/:id' do
-	item_fetch = Inventory.find_by(id: params[:id])
-	if item_fetch
+	inventory_fetch = Inventory.find_by(id: params[:id])
+	if inventory_fetch
+		# we use .includes for performance, each time we call .user it calls the db
 		@reviews_list = Review.includes(:user).where(inventory_id: params[:id])
-		@item = item_fetch
+		@item = inventory_fetch
+		if @item.quantity > 0
+			@stock = "In Stock"
+		else
+			@stock = "Out of Stock"
+		end
 		erb :item
 	end
 end
@@ -88,8 +101,41 @@ post '/reviews/:id' do
 	redirect '/items/' + params[:id]
 end
 
+get '/cart' do
+	cart_list = Cart.find_by(user_id: session[:user_id])
+
+	# @price_total
+
+	erb :cart
+end
+
 post '/cart/add' do
-	return added to cart
+	inventory_fetch = Inventory.find_by(id: params[:id])
+
+	# only allow adding to cart if we have the item in stock
+	if inventory_fetch.quantity >= params[:quantity].to_i
+		# if a cart entry for the user exists, show  it, otherwise create a new one
+		if cart_has_item?(session[:user_id], params[:id])
+			# pop up
+			cart_fetch = Cart.find_by(user_id: session[:user_id], inventory_id: params[:id])
+			cart_fetch.quantity = params[:quantity]
+			cart_fetch.save
+			binding.pry
+		else
+			new_cart = Cart.create(inventory_id: params[:id], user_id: session[:user_id], quantity: params[:quantity])
+		end
+
+		@cart_list = cart_fetch
+		erb :added_cart
+	else
+		# there is not enough stock
+
+	end
+
+end
+
+post '/order' do
+
 end
 
 

@@ -7,13 +7,20 @@
 	<img src="<%= @item.image_url %>" alt="">
 	<h1><%= @item.name %></h1>
 	<p><%= @item.price %> Schmeckles</p>
-	<p>In stock: <%= @item.quantity %></p>
 	<p><%= @item.description %></p>
-	<form action="/cart/add" method="post">
-		<label for="">Quantity</label>
-		<input name="quantity" type="text">
-		<button>Add to cart</button>
-	</form>
+	<% if logged_in? %>
+		<p>Status: <%= @stock %></p>
+		<form action="/cart/add" method="post">
+			<input name="id" type="hidden" value="<%= @item.id %>">
+			<label for="">Quantity</label>
+			<select name="quantity" id="">
+				<% 1.upto(@item.quantity) do |number| %>
+					<option value="<%= number %>"><%= number%></option>
+				<% end %>
+			</select>
+			<button>Add to cart</button>
+		</form>
+	<% end %>
 	<div class="reviews_container">
 		<div class="reviews">
 			<ul>
