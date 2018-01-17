@@ -4,7 +4,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width">
 	<title>Stealys Safe Place</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css">
 	<link rel='stylesheet' href='/stylesheets/main.css'>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
@@ -14,8 +16,11 @@
 		<% if request.path_info != "/" %>
 			<nav class="navbar navbar-light bg-faded">
 				<% if logged_in? %>
-					<div class="nav-item">
-						<a href="/cart">Cart</a>
+					<div class="nav-item cart">
+						<a href="/cart">
+							<i class="fa fa-shopping-cart"></i>
+							<span class="cart_amount"></span>
+						</a>
 					</div>
 					<div class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"><%= current_user.name %></a>

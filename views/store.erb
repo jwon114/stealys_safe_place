@@ -1,12 +1,21 @@
 <h1>Store</h1>
 
-<ul class="inventory_list">
+<!-- <ul class="inventory_list"> -->
+<div class="row">
 	<% @inventory_list.each do |item| %>
-		<li>
-			<a href="/items/<%= item.id %>">
+		<!-- <li> -->
+		<div class="col-md-3 store_item_container">
+			<div class="store_item_border">
+			<a class="store_item" href="/items/<%= item.id %>">
 				<img src="<%= item.image_url%>" alt="">
-				<%= item.name %>
+				<div class="store_item_details">
+					<span class="name"><%= item.name %></span>
+					<span class="price"><%= item.price %></span>
+				</div>
 			</a>
-		</li>
+			</div>
+		</div>
+		<!-- </li> -->
 	<% end %>
-</ul>
+</div>
+<!-- </ul> -->

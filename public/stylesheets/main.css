@@ -21,6 +21,10 @@ body {
 	margin: 0;
 }
 
+a:hover {
+	text-decoration: none;
+}
+
 /*******/
 /* NAV */
 /*******/
@@ -28,6 +32,10 @@ body {
 nav {
 	background-color: beige;
 	height: 50px;
+}
+
+.navbar {
+	justify-content: flex-end;
 }
 
 .dropdown-menu.show {
@@ -39,11 +47,17 @@ nav {
 	padding: 0;
 }
 
+.cart .fa-shopping-cart {
+	
+}
+
+
+
 /*********/
 /* INDEX */
 /*********/
 
-.box {
+.box_container {
 	display: flex;
 	flex-direction: column;
 	height: 100vh;
@@ -90,12 +104,61 @@ nav {
 }
 
 .browse:hover {
-	text-decoration: none;
 	color: #ffdb4d;
 	background-color: #4078a5;
 	transition: .5s;
 }
 
+/*********/
+/* STORE */
+/*********/
+
+.row {
+	padding: 0 20px;
+	margin: 50px 10px;
+}
+
+.store_item_container {
+	display: flex;
+	justify-content: center;
+	/*border: 1px solid black;*/
+	padding: 0;
+}
+
+.store_item_container:hover .store_item_border {
+	box-shadow: 8px 8px 8px 1px black;
+	transition: .25s;
+	background-color: lightblue;
+}
+
+.store_item_border {
+	margin: 5px;
+	width: 100%;
+	transition: .25s;
+}
+
+.store_item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 10px 0;
+}
+
+.store_item img {
+	width: 225px;
+	height: 275px;
+}
+
+.store_item_details {
+	display: flex;
+	flex-direction: column;
+	background-color: lightgrey;
+	width: 225px;
+}
+
+.store_item_details .name {
+	text-transform: capitalize;
+}
 
 /*********/
 /* LOGIN */
@@ -121,13 +184,14 @@ nav {
 .inventory_list {
 	padding: 0;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	flex-wrap: wrap;
 }
 
 .inventory_list li {
 	list-style: none;
-
+	border: 1px solid black;
+	width: 24%;
 }
 
 .inventory_list li a {
