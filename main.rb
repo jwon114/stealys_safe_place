@@ -45,7 +45,6 @@ post '/session' do
 
 	if user && user.authenticate(params[:password])
 		session[:user_id] = user.id
-		puts session[:user_id]
 		redirect '/store'
 	else
 		erb :index
@@ -102,8 +101,8 @@ post '/reviews/:id' do
 end
 
 get '/cart' do
-	cart_list = Cart.find_by(user_id: session[:user_id])
 
+	@cart_fetch = Cart.includes(:inventory).where(user_id: session[:user_id])
 	# @price_total
 
 	erb :cart
@@ -120,13 +119,11 @@ post '/cart/add' do
 			cart_fetch = Cart.find_by(user_id: session[:user_id], inventory_id: params[:id])
 			cart_fetch.quantity = params[:quantity]
 			cart_fetch.save
-			binding.pry
+			return 'added to cart'
 		else
 			new_cart = Cart.create(inventory_id: params[:id], user_id: session[:user_id], quantity: params[:quantity])
+			return 'added to cart'
 		end
-
-		@cart_list = cart_fetch
-		erb :added_cart
 	else
 		# there is not enough stock
 

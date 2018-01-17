@@ -4,5 +4,18 @@
 	<button>Return to store</button>
 </form>
 
+<% if @cart_fetch %>
+	<ul>
+		<% @cart_fetch.each do |item| %>
+			<li>
+				<img src="<%= item.inventory.image_url %>" alt="">
+				<%= item.inventory.name %>
+				<%= item.quantity %>
+			</li>
+		<% end %>
+	</ul>
+<% else %>
+	<h2>No items in the cart</h2>
+<% end %>
 
 
