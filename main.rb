@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'sinatra/reloader'
 require 'uri'
+require 'json'
 require_relative 'db_config'
 require_relative 'models/inventory'
 require_relative 'models/review'
@@ -109,6 +110,11 @@ get '/cart' do
 	erb :cart
 end
 
+get '/cart/number' do
+
+
+end
+
 post '/cart/add' do
 	inventory_fetch = Inventory.find_by(id: params[:id])
 
@@ -120,11 +126,12 @@ post '/cart/add' do
 			cart_fetch = Cart.find_by(user_id: session[:user_id], inventory_id: params[:id])
 			cart_fetch.quantity = params[:quantity]
 			cart_fetch.save
-			return "added to cart"
+			result = JSON.generate({ message: "updated cart" })
 		else
 			new_cart = Cart.create(inventory_id: params[:id], user_id: session[:user_id], quantity: params[:quantity])
-			return "added to cart"
+			result = JSON.generate({ message: "added to cart", quantity: params[:quantity] })
 		end
+		return result
 	else
 		# there is not enough stock
 		return "no stock"

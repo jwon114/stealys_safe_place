@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+	// $('#cartAmount').load('/cart', function(result) {
+	// 	// console.log(result)
+	// })
+
 	$('#addToCart').on('click', function(event) {
 		// stop refresh of page after post submission on form
 		event.preventDefault();
@@ -11,8 +15,11 @@ $(document).ready(function() {
 			data: { id: item_id, quantity: quantity_value },
 		})
 		.done(function(result) {
-			if (result === "added to cart") {
-				$('#cartModal').modal('show')
+			result = JSON.parse(result)
+			console.log(result.message);
+			if (result.message === "added to cart") {
+				$('#cartModal').modal('show');
+				$('#cartAmount').text(parseInt($('#cartAmount').text()) + parseInt(result.quantity));
 			}
 		});
 	});
