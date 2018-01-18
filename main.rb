@@ -113,10 +113,9 @@ post '/reviews/:id' do
 end
 
 get '/cart' do
-
 	@cart_fetch = Cart.includes(:inventory).where(user_id: session[:user_id])
-	# @price_total
-
+	# @price_total = @cart_fetch.sum(:price)
+	
 	erb :cart
 end
 
@@ -147,6 +146,11 @@ post '/cart/add' do
 		return "no stock"
 	end
 
+end
+
+delete '/cart/delete' do
+	Cart.delete(params[:id])
+	redirect '/cart'
 end
 
 post '/order' do
