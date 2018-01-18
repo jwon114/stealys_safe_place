@@ -1,5 +1,7 @@
+
 $(document).ready(function() {
 
+	console.log($('#cartAmount').text());
 	$.ajax({
 		type: 'GET',
 		url: '/cart/amount'

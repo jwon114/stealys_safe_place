@@ -28,7 +28,9 @@
 
 <div class="item_container">
 	<div class="item">
-		<img src="<%= @item.image_url %>" alt="">
+		<div class="item_image_container">
+			<img src="<%= @item.image_url %>" alt="">
+		</div>
 		<div class="item_details">
 			<h1><%= @item.name %></h1>
 			<p><%= @item.price %> Schmeckles</p>
