@@ -8,9 +8,9 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
 	<link rel='stylesheet' href='/stylesheets/main.css'>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="/javascripts/bootstrap-rating-input.min.js" type="text/javascript"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
 </head>
@@ -18,7 +18,9 @@
 	<header>
 		<% if request.path_info != "/" %>
 			<nav class="navbar navbar-light bg-faded">
-				<h1 class="nav_title">Stealys Safe Place</h1>
+				<a href="/">
+					<h1 class="nav_title">Stealys Safe Place</h1>
+				</a>
 				<% if logged_in? %>
 					<div class="nav-item cart">
 						<a href="/cart">
@@ -39,7 +41,7 @@
 						</div>
 					</div>
 				<% else %>
-					<a href="/users/login">Login</a>
+					<a class="layout_login" href="/users/login">Login</a>
 				<% end %>
 			</nav>
 		<% end %>
