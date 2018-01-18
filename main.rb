@@ -115,7 +115,7 @@ end
 get '/cart' do
 	@cart_fetch = Cart.includes(:inventory).where(user_id: session[:user_id])
 	@price_total = @cart_fetch.sum(:price)
-	
+
 	erb :cart
 end
 
@@ -154,7 +154,11 @@ delete '/cart/delete' do
 end
 
 post '/order' do
-
+	cart_items = Cart.where(user_id: session[:user_id])
+	cart_items.each do |item|
+		inventory_quantity = Inventory.find_by(id: item.id).select(:quantity)
+		
+	end
 end
 
 

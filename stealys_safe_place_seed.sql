@@ -38,6 +38,19 @@ VALUES ('interdimensional cable', 'A cable box that gives access to television s
 INSERT INTO inventories (name, description, price, quantity, image_url)
 VALUES ('IQ enhancing helmet', 'Boosts the wearers IQ considerably. You should try it', 400, 1, 'https://vignette.wikia.nocookie.net/rickandmorty/images/9/9c/IQ_Enhancing_Helmet.png/revision/latest?cb=20160910011355');
 
+INSERT INTO inventories (name, description, price, quantity, image_url)
+VALUES ('turbulent juice', 'A multi-purpose cleaning product and nutritional supplement fluid advertised on cable channels based in dimensions other than C-137.', 80, 5, 'https://vignette.wikia.nocookie.net/rickandmorty/images/6/64/Favicon.ico/revision/latest?cb=20160924233037');
+
+INSERT INTO inventories (name, description, price, quantity, image_url)
+VALUES ('Roy VR Headset', 'How far can you take Rocket Roy?', 300, 2, 'https://vignette.wikia.nocookie.net/rickandmorty/images/0/04/Roy_VR_Headset.png/revision/latest?cb=20160909154240');
+
+INSERT INTO inventories (name, description, price, quantity, image_url)
+VALUES ('love potion', 'Move things well outside of the "friendzone".', 175, 3, 'https://vignette.wikia.nocookie.net/rickandmorty/images/3/3b/Love_Potion.png/revision/latest?cb=20160909140255');
+
+INSERT INTO inventories (name, description, price, quantity, image_url)
+VALUES ('neutrino bomb', 'Kills all the living things. (Stand back.)', 500, 1, 'https://vignette.wikia.nocookie.net/rickandmorty/images/b/b1/Neutrino_Bomb.png/revision/latest/scale-to-width-down/310?cb=20160910005717');
+
+
 -- CARTS
 
 -- INSERT INTO carts(inventory_id, quantity, user_id)

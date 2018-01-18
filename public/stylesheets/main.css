@@ -599,4 +599,9 @@ nav {
 	padding: 10px 20px;
 }
 
+.order_cart button:hover {
+	background-color: lawngreen;
+	cursor: pointer;	
+}
+
 
