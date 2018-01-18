@@ -6,7 +6,7 @@ require_relative 'models/inventory'
 require_relative 'models/review'
 require_relative 'models/user'
 require_relative 'models/cart'
-require 'pry'
+# require 'pry'
 
 MAX_ORDER = 10
 
