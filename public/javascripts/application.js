@@ -14,16 +14,24 @@ $(document).ready(function() {
 		}
 	});
 
-	$('#starRating').rateYo({
+	$('.starRating').rateYo({
 		starWidth: "40px",
 		normalFill: "#A0A0A0",
 		ratedFill: "rgb(243, 156, 18)",
-		halfStar: true
+		fullStar: true,
+	})
+
+	$('.starReadOnly').rateYo({
+		starWidth: "40px",
+		normalFill: "#A0A0A0",
+		ratedFill: "rgb(243, 156, 18)",
+		fullStar: true,
+		readOnly: true
 	})
 
 
 	$('#submit_review').on('click', function() {
-		var itemRating = $('#starRating').rateYo('rating')
+		var itemRating = $('.starRating').rateYo('rating')
 		console.log('itemRating', itemRating);
 		$('#rating_field').attr('value', itemRating);
 	})

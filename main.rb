@@ -6,7 +6,7 @@ require_relative 'models/inventory'
 require_relative 'models/review'
 require_relative 'models/user'
 require_relative 'models/cart'
-# require 'pry'
+require 'pry'
 
 MAX_ORDER = 10
 
@@ -85,7 +85,12 @@ get '/items/:id' do
 	inventory_fetch = Inventory.find_by(id: params[:id])
 	if inventory_fetch
 		# we use .includes for performance, each time we call .user it calls the db
-		@reviews_list = Review.includes(:user).where(inventory_id: params[:id])
+		reviews_fetch = Review.includes(:user).where(inventory_id: params[:id])
+		@reviews_list = []
+		reviews_fetch.each do |review| 
+			rating = "<div class='starReadOnly' data-rateyo-rating='#{review.rating.to_i}'></div>"
+			@reviews_list << { data: review, review_rating: rating }
+		end
 		@item = inventory_fetch
 		if @item.quantity > 0
 			@stock = "In Stock"
@@ -97,7 +102,7 @@ get '/items/:id' do
 end
 
 post '/reviews/:id' do
-	new_review = Review.create(inventory_id: params[:id], user_id: session[:user_id], review_text: params[:review], rating: params[:rating])
+	new_review = Review.create(inventory_id: params[:id], user_id: session[:user_id], review: params[:review], rating: params[:rating])
 	redirect '/items/' + params[:id]
 end
 
@@ -111,7 +116,6 @@ end
 
 get '/cart/amount' do
 	cart_amount = Cart.where(user_id: session[:user_id]).count
-	puts cart_amount
 	return JSON.generate(cart_amount)
 end
 

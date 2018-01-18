@@ -55,11 +55,11 @@
 	</div>
 	<div class="reviews_container">
 		<% if logged_in? %>
+			<div class="starRating" data-rateyo-rating="4"></div>			
 			<form class="reviews_input" action="/reviews/<%= @item.id %>" method="post">
 				<textarea name="review" id="" cols="50" rows="5" placeholder="Add a review"></textarea>
 				<button id="submit_review">Submit Review</button>
 				<input id="rating_field" name="rating" type="hidden" value="">
-				<div id="starRating"></div>
 			</form>
 		<% end %>
 		<div class="reviews">
@@ -67,9 +67,9 @@
 				<% if @reviews_list %>
 					<% @reviews_list.each do |record| %>
 						<li>
-							<!-- <p>Rating</p> -->
-							<p class="username"><%= record.user.name%></p>
-							<p><%= record.review %></p>
+							<%= record[:review_rating] %>
+							<p class="username"><%= record[:data].user.name%></p>
+							<p><%= record[:data].review %></p>
 						</li>
 					<% end %>
 				<% end %>
