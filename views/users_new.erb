@@ -1,11 +1,14 @@
-<h1>Create New User</h1>
-
-<form action="/users/create" method="post">
-	<label for="">Name</label>
-	<input name="name" type="text">
-	<label for="">Email</label>
-	<input name="email" type="text">
-	<label for="">Password</label>
-	<input name="password" type="password">
-	<button>Create</button>
-</form>
+<h1 class="new_user_header">Create New User</h1>
+<div class="new_user_container">
+	<form class="new_user_form" action="/users/create" method="post">
+		<label for="">Name</label>
+		<input name="name" type="text">
+		<label for="">Email</label>
+		<input name="email" type="text">
+		<label for="">Password</label>
+		<div class="password_create">
+			<input name="password" type="password">
+			<button>Create</button>
+		</div>
+	</form>
+</div>

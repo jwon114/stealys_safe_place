@@ -1,5 +1,5 @@
 require 'sinatra'
-# require 'sinatra/reloader'
+require 'sinatra/reloader'
 require 'json'
 require_relative 'db_config'
 require_relative 'models/inventory'
@@ -44,7 +44,13 @@ post '/session' do
 		session[:user_id] = user.id
 		redirect '/store'
 	else
-		erb :index
+		if user == nil
+			@error = "No such Email and Password combination exists, try create a new user"
+		else
+			@error = "Email and Password are incorrect"
+		end
+
+		erb :login
 	end
 end
 
@@ -102,7 +108,7 @@ get '/items/:id' do
 end
 
 post '/reviews/:id' do
-	new_review = Review.create(inventory_id: params[:id], user_id: session[:user_id], review: params[:review], rating: params[:rating])
+	new_review = Review.create(inventory_id: params[:id], user_id: session[:user_id], review_text: params[:review], rating: params[:rating])
 	redirect '/items/' + params[:id]
 end
 
