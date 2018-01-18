@@ -18,6 +18,7 @@ $(document).ready(function() {
 	// 	});
 	// });
 
+	// setup star rating clickable
 	$('.starRating').rateYo({
 		starWidth: "40px",
 		normalFill: "#A0A0A0",
@@ -25,6 +26,7 @@ $(document).ready(function() {
 		fullStar: true,
 	})
 
+	// setup star rating in review (readyOnly)
 	$('.starReadOnly').rateYo({
 		starWidth: "40px",
 		normalFill: "#A0A0A0",
@@ -46,12 +48,13 @@ $(document).ready(function() {
 		$('.stock_status').css('color', 'lawngreen');
 	}
 
+	// check for quantity, if available then show the modal.
+	// update the cartAmount before page refreshes for instant amount update
 	$('#addToCart').on('click', function(event) {
 		// stop refresh of page after post submission on form
 		event.preventDefault();
 		var quantity_value = $('.quantity_form select').val();
 		var item_id = $('.quantity_form #item_id').val();
-		console.log(quantity_value);
 		if (quantity_value !== null) {
 			$.ajax({
 				type: "POST",
@@ -59,7 +62,6 @@ $(document).ready(function() {
 				data: { id: item_id, quantity: quantity_value }
 			})
 			.done(function(result) {
-				console.log(result);
 				result = JSON.parse(result)
 				if (result.message === "added to cart") {
 					$('#modalMessage').text(result.message);
