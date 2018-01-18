@@ -1,10 +1,10 @@
+<form action="/store">
+	<button>Back to store</button>
+</form>
 <div class="item_header">
 	<h1>Item</h1>
 	<img src="/images/stealy.png" alt="">
 </div>
-<form action="/store">
-	<button>Back to store</button>
-</form>
 
 <!-- Modal -->
 <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -55,9 +55,12 @@
 	</div>
 	<div class="reviews_container">
 		<% if logged_in? %>
-			<div class="starRating" data-rateyo-rating="4"></div>			
+			<div class="rating_container">
+				<span>Rate This Product</span>
+				<div class="starRating" data-rateyo-rating="4"></div>
+			</div>			
 			<form class="reviews_input" action="/reviews/<%= @item.id %>" method="post">
-				<textarea name="review" id="" cols="50" rows="5" placeholder="Add a review"></textarea>
+				<textarea name="review" id="" cols="70" rows="5" placeholder="Add a review"></textarea>
 				<button id="submit_review">Submit Review</button>
 				<input id="rating_field" name="rating" type="hidden" value="">
 			</form>
@@ -69,7 +72,7 @@
 						<li>
 							<%= record[:review_rating] %>
 							<p class="username"><%= record[:data].user.name%></p>
-							<p><%= record[:data].review_text %></p>
+							<p class="review_text"><%= record[:data].review_text %></p>
 						</li>
 					<% end %>
 				<% end %>

@@ -258,13 +258,18 @@ nav {
 
 .new_user_header {
 	margin-top: 5%;
-	margin-left: 5%;
+	margin-left: 10.5%;
 }
 
 .new_user_container {
 	height: 50vh;
-	margin-left: 5%;
-	margin-top: 5%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.new_user_container img {
+	height: 400px;
 }
 
 .new_user_form {
@@ -273,8 +278,10 @@ nav {
 	width: 40%;
 }
 
-.password_create {
-	
+.new_user_create {
+	margin-top: 5%;
+	font-size: 25px;
+	padding: 10px;
 }
 
 /*************/
@@ -318,13 +325,13 @@ nav {
 	align-items: center;
 	width: 80%;
 	margin: 0 auto;
-	border: 1px solid black;
+	/*border: 1px solid black;*/
 }
 
 .item_header {
 	display: flex;
 	justify-content: center;
-	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 .item_header img {
@@ -339,7 +346,6 @@ nav {
 
 .item_image_container {
 	padding: 20px;
-	/*background-color: lightgrey;*/
 }
 
 .item_image_container img {
@@ -365,13 +371,23 @@ nav {
 
 .reviews_container {
 	width: 100%;
-	border: 1px solid black;
+	/*border: 1px solid black;*/
 	margin-top: 25px;
 }
 
 .reviews_input {
 	margin-bottom: 25px;
-	border: 1px solid black;
+	/*border: 1px solid black;*/
+	padding: 20px 0;
+	display: flex;
+	align-items: center;
+}
+
+#submit_review {
+	margin-left: 5%;
+	height: 60px;
+	font-size: 20px;
+	padding: 10px 20px;
 }
 
 .reviews ul {
@@ -388,18 +404,36 @@ nav {
 
 .reviews ul li p {
 	margin-bottom: 0;
+	margin-left: 5px;
 }
 
 .reviews ul li .username {
-	/*background-color: lightgrey;*/
 	font-style: italic;
 	font-size: 25px;
 }
 
-.starRating {
-	padding: 0;
+.reviews ul li .review_text {
+
 }
 
+.starRating {
+	padding: 0;
+	padding-left: 40px;
+}
+
+.starReadOnly {
+	padding: 0;
+	margin-bottom: 20px;
+}
+
+.rating_container {
+	display: flex;
+	align-items: center;
+}
+
+.rating_container span {
+	font-size: 25px;
+}
 
 
 
