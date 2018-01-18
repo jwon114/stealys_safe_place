@@ -51,21 +51,8 @@
 		</div>
 	</div>
 	<div class="reviews_container">
-		<div class="reviews">
-			<ul>
-				<% if @reviews_list %>
-					<% @reviews_list.each do |record| %>
-						<li>
-							<p><%= record.review %></p>
-							<p><%= record.user.name%></p>
-								
-						</li>
-					<% end %>
-				<% end %>
-			</ul>
-		</div>
 		<% if logged_in? %>
-			<form action="/reviews/<%= @item.id %>" method="post">
+			<form class="reviews_input" action="/reviews/<%= @item.id %>" method="post">
 				<textarea name="review" id="" cols="50" rows="5" placeholder="Add a review"></textarea>
 				<button>Submit Review</button>
 				<label name="star1" type="radio"></label>
@@ -80,5 +67,18 @@
 				<input name="star5" type="radio">
 			</form>
 		<% end %>
+		<div class="reviews">
+			<ul>
+				<% if @reviews_list %>
+					<% @reviews_list.each do |record| %>
+						<li>
+							<!-- <p>Rating</p> -->
+							<p class="username"><%= record.user.name%></p>
+							<p><%= record.review %></p>
+						</li>
+					<% end %>
+				<% end %>
+			</ul>
+		</div>
 	</div>
 </div>

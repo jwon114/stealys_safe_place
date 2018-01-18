@@ -1,6 +1,5 @@
 require 'sinatra'
-require 'sinatra/reloader'
-require 'uri'
+# require 'sinatra/reloader'
 require 'json'
 require_relative 'db_config'
 require_relative 'models/inventory'
@@ -70,7 +69,7 @@ post '/users/create' do
 		redirect '/users/new'
 	else
 		new_user = User.create(name: params[:name], email: params[:email], password: params[:password])
-		redirect '/'
+		redirect '/store'
 	end
 end
 
