@@ -39,7 +39,7 @@ INSERT INTO inventories (name, description, price, quantity, image_url)
 VALUES ('IQ enhancing helmet', 'Boosts the wearers IQ considerably. You should try it', 400, 1, 'https://vignette.wikia.nocookie.net/rickandmorty/images/9/9c/IQ_Enhancing_Helmet.png/revision/latest?cb=20160910011355');
 
 INSERT INTO inventories (name, description, price, quantity, image_url)
-VALUES ('turbulent juice', 'A multi-purpose cleaning product and nutritional supplement fluid advertised on cable channels based in dimensions other than C-137.', 80, 5, 'https://vignette.wikia.nocookie.net/rickandmorty/images/6/64/Favicon.ico/revision/latest?cb=20160924233037');
+VALUES ('turbulent juice', 'A multi-purpose cleaning product and nutritional supplement fluid advertised on cable channels based in dimensions other than C-137.', 80, 5, 'https://vignette.wikia.nocookie.net/rickandmorty/images/f/f5/Turbulent_Juice_Tube.png/revision/latest?cb=20160910012824');
 
 INSERT INTO inventories (name, description, price, quantity, image_url)
 VALUES ('Roy VR Headset', 'How far can you take Rocket Roy?', 300, 2, 'https://vignette.wikia.nocookie.net/rickandmorty/images/0/04/Roy_VR_Headset.png/revision/latest?cb=20160909154240');
