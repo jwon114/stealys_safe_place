@@ -121,7 +121,7 @@ get '/cart' do
 end
 
 get '/cart/amount' do
-	cart_amount = Cart.where(user_id: session[:user_id]).count
+	cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
 	return JSON.generate(cart_amount)
 end
 
