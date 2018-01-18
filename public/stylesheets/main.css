@@ -325,11 +325,11 @@ nav {
 	padding: 10px 20px;
 }
 
-.login_error {
+.login_message {
 	margin-top: 5%;
 }
 
-.login_error h3 {
+.login_message h3 {
 	color: crimson;
 }
 
@@ -453,6 +453,7 @@ nav {
 	border: 1px solid black;
 	margin-bottom: 20px;
 	padding: 20px;
+	border-radius: 20px;
 }
 
 .reviews ul li p {

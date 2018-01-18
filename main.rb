@@ -10,11 +10,6 @@ require 'pry'
 
 MAX_ORDER = 10
 
-# TODO:
-# login.erb
-# adding to cart
-# can't add to cart unless logged in
-
 enable :sessions
 
 helpers do
@@ -45,9 +40,9 @@ post '/session' do
 		redirect '/store'
 	else
 		if user == nil
-			@error = "No such Email and Password combination exists, try create a new user"
+			@login_message = "No such Email and Password combination exists, try create a new user"
 		else
-			@error = "Email and Password are incorrect"
+			@login_message = "Email and Password are incorrect"
 		end
 
 		erb :login
@@ -60,6 +55,11 @@ delete '/session' do
 end
 
 get '/users/login' do
+	
+	if params[:email]
+		@login_message = "New user #{params[:email]} created!"
+	end
+
 	erb :login
 end
 
@@ -71,11 +71,11 @@ post '/users/create' do
 	user = User.find_by(email: params[:email])
 
 	if user
-		@error = "User with email already exists"
+		@login_message = "User with email already exists"
 		redirect '/users/new'
 	else
 		new_user = User.create(name: params[:name], email: params[:email], password: params[:password])
-		redirect '/users/login'
+		redirect "/users/login?email=#{params[:email]}"
 	end
 end
 
@@ -102,6 +102,10 @@ get '/items/:id' do
 		@item = inventory_fetch
 		if @item.quantity > 0
 			@stock = "In Stock"
+			if @item.quantity > MAX_ORDER
+				@quantity = MAX_ORDER
+			end
+			@quantity = @item.quantity
 		else
 			@stock = "Out of Stock"
 		end
@@ -122,11 +126,6 @@ get '/cart' do
 	erb :cart
 end
 
-# get '/cart/amount' do
-# 	cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
-# 	return JSON.generate(cart_amount)
-# end
-
 post '/cart/add' do
 	inventory_fetch = Inventory.find_by(id: params[:id])
 
@@ -143,7 +142,6 @@ post '/cart/add' do
 			new_cart = Cart.create(inventory_id: params[:id], user_id: session[:user_id], quantity: params[:quantity])
 			result = JSON.generate({ message: "added to cart", quantity: params[:quantity] })
 		end
-		# @cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
 		return result
 	end
 end
@@ -156,7 +154,6 @@ end
 post '/order' do
 	cart_items = Cart.where(user_id: session[:user_id])
 	cart_items.each do |item|
-		# binding.pry
 		inventory_quantity = Inventory.where(id: item.inventory_id).first.quantity
 		Inventory.update(item.inventory_id, :quantity => (inventory_quantity - item.quantity))
 		Cart.delete(item.id)

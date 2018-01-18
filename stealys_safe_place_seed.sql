@@ -21,7 +21,7 @@ INSERT INTO inventories (name, description, price, quantity, image_url)
 VALUES ('butter robot', 'A small, two armed, mobile robot created for the sole purpose of passing butter.', 75, 5, 'https://vignette.wikia.nocookie.net/rickandmorty/images/6/67/Butter_Robot_Picture.png/revision/latest?cb=20171106225602');
 
 INSERT INTO inventories (name, description, price, quantity, image_url) 
-VALUES ('plumbus', 'An all-purpose home device. Everyone knows what it does, so there is no reason to explain it.', 100, 3, 'https://vignette.wikia.nocookie.net/rickandmorty/images/d/d1/Everybody_has_a_Plumbus.JPG/revision/latest?cb=20170926163022');
+VALUES ('plumbus', 'An all-purpose home device. Everyone knows what it does, so there is no reason to explain it.', 100, 20, 'https://vignette.wikia.nocookie.net/rickandmorty/images/d/d1/Everybody_has_a_Plumbus.JPG/revision/latest?cb=20170926163022');
 
 INSERT INTO inventories (name, description, price, quantity, image_url) 
 VALUES ('mr meeseeks box', 'A gadget that creates a Mr. Meeseeks for the purpose of completing one given objective.', 250, 2, 'https://vignette.wikia.nocookie.net/rickandmorty/images/f/f7/Mr._Meeseeks_Box.png/revision/latest?cb=20160909153718');

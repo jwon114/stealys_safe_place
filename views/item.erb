@@ -43,7 +43,7 @@
 					<input id="item_id" name="id" type="hidden" value="<%= @item.id %>">
 					<label for="">Quantity</label>
 					<select id="quantity_select" name="quantity" id="">
-						<% 1.upto(@item.quantity) do |number| %>
+						<% 1.upto(@quantity) do |number| %>
 							<option value="<%= number %>"><%= number%></option>
 						<% end %>
 					</select>
