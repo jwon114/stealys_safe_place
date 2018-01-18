@@ -32,7 +32,7 @@ CREATE TABLE reviews (
 	id SERIAL PRIMARY KEY,
 	inventory_id INTEGER NOT NULL,
 	user_id INTEGER NOT NULL,
-	review TEXT,
+	review_text TEXT,
 	rating INTEGER,
 	FOREIGN KEY (inventory_id) REFERENCES inventories (id) ON DELETE CASCADE,
 	FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE

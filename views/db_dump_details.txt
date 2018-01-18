@@ -1,0 +1,11 @@
+CREATE A DB DUMP
+
+pg_dump -Fc --no-acl --no-owner -h localhost -U James stealys_safe_place > db.dump
+
+DB DUMP LOCATION
+
+https://github.com/jwon114/stealys_safe_place/raw/master/db.dump
+
+DB DUMP RESTORE
+
+heroku pg:backups:restore 'https://github.com/jwon114/stealys_safe_place/raw/master/db.dump' DATABASE_URL

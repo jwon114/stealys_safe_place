@@ -97,7 +97,7 @@ get '/items/:id' do
 end
 
 post '/reviews/:id' do
-	new_review = Review.create(inventory_id: params[:id], user_id: session[:user_id], review: params[:review])
+	new_review = Review.create(inventory_id: params[:id], user_id: session[:user_id], review_text: params[:review], rating: params[:rating])
 	redirect '/items/' + params[:id]
 end
 

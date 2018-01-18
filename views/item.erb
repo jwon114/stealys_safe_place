@@ -1,6 +1,6 @@
 <div class="item_header">
 	<h1>Item</h1>
-	<img src="./images/stealy.png" alt="">
+	<img src="/images/stealy.png" alt="">
 </div>
 <form action="/store">
 	<button>Back to store</button>
@@ -57,17 +57,9 @@
 		<% if logged_in? %>
 			<form class="reviews_input" action="/reviews/<%= @item.id %>" method="post">
 				<textarea name="review" id="" cols="50" rows="5" placeholder="Add a review"></textarea>
-				<button>Submit Review</button>
-				<label name="star1" type="radio"></label>
-				<input name="star1" type="radio">
-				<label name="star2" type="radio"></label>
-				<input name="star2" type="radio">
-				<label name="star3" type="radio"></label>
-				<input name="star3" type="radio">
-				<label name="star4" type="radio"></label>
-				<input name="star4" type="radio">
-				<label name="star5" type="radio"></label>
-				<input name="star5" type="radio">
+				<button id="submit_review">Submit Review</button>
+				<input id="rating_field" name="rating" type="hidden" value="">
+				<div id="starRating"></div>
 			</form>
 		<% end %>
 		<div class="reviews">

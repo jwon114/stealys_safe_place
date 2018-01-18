@@ -1,7 +1,7 @@
 
 $(document).ready(function() {
-
-	console.log($('#cartAmount').text());
+	
+	// console.log($('#cartAmount').text());
 	$.ajax({
 		type: 'GET',
 		url: '/cart/amount'
@@ -14,6 +14,20 @@ $(document).ready(function() {
 		}
 	});
 
+	$('#starRating').rateYo({
+		starWidth: "40px",
+		normalFill: "#A0A0A0",
+		ratedFill: "rgb(243, 156, 18)",
+		halfStar: true
+	})
+
+
+	$('#submit_review').on('click', function() {
+		var itemRating = $('#starRating').rateYo('rating')
+		console.log('itemRating', itemRating);
+		$('#rating_field').attr('value', itemRating);
+	})
+
 	$('#addToCart').on('click', function(event) {
 		// stop refresh of page after post submission on form
 		event.preventDefault();
@@ -22,7 +36,7 @@ $(document).ready(function() {
 		$.ajax({
 			type: "POST",
 			url: "/cart/add",
-			data: { id: item_id, quantity: quantity_value },
+			data: { id: item_id, quantity: quantity_value }
 		})
 		.done(function(result) {
 			result = JSON.parse(result)

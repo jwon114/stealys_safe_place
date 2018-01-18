@@ -31,6 +31,7 @@ a:hover {
 
 nav {
 	background-color: beige;
+	height: 62px;
 }
 
 .nav_title {
@@ -45,6 +46,10 @@ nav {
 
 .navbar {
 	justify-content: flex-end;
+}
+
+.dropdown:hover {
+
 }
 
 .dropdown-menu.show {
@@ -270,6 +275,11 @@ nav {
 .item_header {
 	display: flex;
 	justify-content: center;
+	margin-top: 20px;
+}
+
+.item_header img {
+	height: 200px;
 }
 
 .item {
@@ -324,6 +334,7 @@ nav {
 	list-style: none;
 	border: 1px solid black;
 	margin-bottom: 20px;
+	padding: 20px;
 }
 
 .reviews ul li p {
