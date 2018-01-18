@@ -114,7 +114,7 @@ end
 
 get '/cart' do
 	@cart_fetch = Cart.includes(:inventory).where(user_id: session[:user_id])
-	# @price_total = @cart_fetch.sum(:price)
+	@price_total = @cart_fetch.sum(:price)
 	
 	erb :cart
 end

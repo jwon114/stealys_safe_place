@@ -34,6 +34,17 @@
 			</div>
 		<% end %>
 	</div>
+	<div class="price_total_container">
+		<span class="total">Total:</span>
+		<div>
+			<span class="price_total"><%= @price_total %></span>
+			<span>Schmeckles</span>
+		</div>
+	</div>
+	<form class="order_cart" action="/order" method="post">
+		<input type="hidden" name="_method" value="delete">
+		<button>Order</button>
+	</form>
 <% else %>
 	<div class="empty_cart_container">
 		<p class="speech-bubble">Cart is empty! Nothing to see here.</p>

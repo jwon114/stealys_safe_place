@@ -25,7 +25,7 @@ a:hover {
 	text-decoration: none;
 }
 
-h1, h2, label, button, a, p, span {
+h1, h2, h3, label, button, a, p, span {
 	font-family: 'Kanit', sans-serif;
 }
 
@@ -40,6 +40,7 @@ button {
 nav {
 	background-color: beige;
 	height: 62px;
+	border-bottom: 2px solid black;
 }
 
 .nav_title {
@@ -152,6 +153,7 @@ nav {
 	color: #ffdb4d;
 	background-color: #4078a5;
 	transition: .5s;
+	box-shadow: 0 0 8px 8px darkorange;
 }
 
 /*********/
@@ -288,20 +290,24 @@ nav {
 	width: 30%;
 }
 
-.login_header {
-	margin-top: 5%;
-	text-align: center;
-	/*font-size: 40px;*/
-}
-
 .login_button {
 	font-size: 30px;
 	padding: 10px;
 	margin-top: 10%;
 }
 
+.login_button:hover {
+	background-color: #a3bb7c;
+	cursor: pointer;
+}
+
 .create_user {
 	margin-top: 5%;
+}
+
+.create_user button:hover {
+	cursor: pointer;
+	background-color: mistyrose;
 }
 
 .create_user button {
@@ -311,6 +317,10 @@ nav {
 
 .login_error {
 	margin-top: 5%;
+}
+
+.login_error h3 {
+	color: crimson;
 }
 
 /************/
@@ -339,10 +349,15 @@ nav {
 	width: 40%;
 }
 
-.new_user_create {
+.new_user_create_button {
 	margin-top: 5%;
 	font-size: 25px;
 	padding: 10px;
+}
+
+.new_user_create_button:hover {
+	cursor: pointer;
+	background-color: #a3bb7c;
 }
 
 /*************/
@@ -509,7 +524,7 @@ nav {
 }
 
 .row.cart_headers span {
-	font-size: 20px;
+	font-size: 30px;
 	text-transform: uppercase;
 }
 
@@ -562,5 +577,26 @@ nav {
 	border: 5px solid mistyrose;
 }
 
+.price_total_container {
+	display: flex;
+	justify-content: flex-end;
+	font-size: 40px;
+	margin: 20px;
+}
+
+.price_total_container .total {
+	margin-right: 20px;
+}
+
+.order_cart {
+	display: flex;
+	justify-content: flex-end;
+	margin: 20px;
+	font-size: 40px;
+}
+
+.order_cart button {
+	padding: 10px 20px;
+}
 
 
