@@ -82,6 +82,7 @@ end
 get '/store' do
 	inventory_fetch = Inventory.all
 	if inventory_fetch
+		@cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
 		@inventory_list = inventory_fetch
 		erb :store
 	end
@@ -91,6 +92,7 @@ get '/items/:id' do
 	inventory_fetch = Inventory.find_by(id: params[:id])
 	if inventory_fetch
 		# we use .includes for performance, each time we call .user it calls the db
+		@cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
 		reviews_fetch = Review.includes(:user).where(inventory_id: params[:id])
 		@reviews_list = []
 		reviews_fetch.each do |review| 
@@ -113,16 +115,17 @@ post '/reviews/:id' do
 end
 
 get '/cart' do
+	@cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
 	@cart_fetch = Cart.includes(:inventory).where(user_id: session[:user_id])
 	@price_total = @cart_fetch.sum(:price)
 
 	erb :cart
 end
 
-get '/cart/amount' do
-	cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
-	return JSON.generate(cart_amount)
-end
+# get '/cart/amount' do
+# 	cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
+# 	return JSON.generate(cart_amount)
+# end
 
 post '/cart/add' do
 	inventory_fetch = Inventory.find_by(id: params[:id])
@@ -140,12 +143,9 @@ post '/cart/add' do
 			new_cart = Cart.create(inventory_id: params[:id], user_id: session[:user_id], quantity: params[:quantity])
 			result = JSON.generate({ message: "added to cart", quantity: params[:quantity] })
 		end
+		# @cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
 		return result
-	else
-		# there is not enough stock
-		return "no stock"
 	end
-
 end
 
 delete '/cart/delete' do
@@ -156,9 +156,18 @@ end
 post '/order' do
 	cart_items = Cart.where(user_id: session[:user_id])
 	cart_items.each do |item|
-		inventory_quantity = Inventory.find_by(id: item.id).select(:quantity)
-		
+		# binding.pry
+		inventory_quantity = Inventory.where(id: item.inventory_id).first.quantity
+		Inventory.update(item.inventory_id, :quantity => (inventory_quantity - item.quantity))
+		Cart.delete(item.id)
 	end
+
+	redirect '/success'
+end
+
+get '/success' do
+	@cart_amount = 0
+	erb :order_success
 end
 
 

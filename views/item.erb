@@ -16,7 +16,10 @@
 	        	<span id="modalMessage"></span> : <span class="modal_item_name"><%= @item.name%></span>
 	      	</div>
 	      	<div class="modal-footer">
-        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Continue Shopping</button>
+	      		<form action="/store">
+	      			<!-- removed data-dismiss="modal" but navigated to /store so cart amount would refresh -->
+        			<button class="btn btn-secondary">Continue Shopping</button>
+        		</form>
 	      		<form action="/cart">
 	        		<button id="checkout" class="btn btn-primary">Checkout</button>
 	      		</form>
@@ -35,11 +38,11 @@
 			<p><%= @item.price %> Schmeckles</p>
 			<p><%= @item.description %></p>
 			<% if logged_in? %>
-				<p>Status: <%= @stock %></p>
+				<p class="stock_status">Status: <%= @stock %></p>
 				<form class="quantity_form" action="">
 					<input id="item_id" name="id" type="hidden" value="<%= @item.id %>">
 					<label for="">Quantity</label>
-					<select name="quantity" id="">
+					<select id="quantity_select" name="quantity" id="">
 						<% 1.upto(@item.quantity) do |number| %>
 							<option value="<%= number %>"><%= number%></option>
 						<% end %>
