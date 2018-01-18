@@ -110,9 +110,10 @@ get '/cart' do
 	erb :cart
 end
 
-get '/cart/number' do
-
-
+get '/cart/amount' do
+	cart_amount = Cart.where(user_id: session[:user_id]).count
+	puts cart_amount
+	return JSON.generate(cart_amount)
 end
 
 post '/cart/add' do

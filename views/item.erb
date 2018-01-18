@@ -14,7 +14,7 @@
         		</button>
       		</div>
 	      	<div class="modal-body">
-	        	<%= @item.name%> added to cart
+	        	<span id="modalMessage"></span> : <%= @item.name%> 
 	      	</div>
 	      	<div class="modal-footer">
         		<button type="button" class="btn btn-secondary" data-dismiss="modal">Continue Shopping</button>
@@ -26,24 +26,28 @@
   	</div>
 </div>
 
-<div class="item">
-	<img src="<%= @item.image_url %>" alt="">
-	<h1><%= @item.name %></h1>
-	<p><%= @item.price %> Schmeckles</p>
-	<p><%= @item.description %></p>
-	<% if logged_in? %>
-		<p>Status: <%= @stock %></p>
-		<form class="quantity_form" action="">
-			<input id="item_id" name="id" type="hidden" value="<%= @item.id %>">
-			<label for="">Quantity</label>
-			<select name="quantity" id="">
-				<% 1.upto(@item.quantity) do |number| %>
-					<option value="<%= number %>"><%= number%></option>
-				<% end %>
-			</select>
-			<button id="addToCart">Add to cart</button>
-		</form>
-	<% end %>
+<div class="item_container">
+	<div class="item">
+		<img src="<%= @item.image_url %>" alt="">
+		<div class="item_details">
+			<h1><%= @item.name %></h1>
+			<p><%= @item.price %> Schmeckles</p>
+			<p><%= @item.description %></p>
+			<% if logged_in? %>
+				<p>Status: <%= @stock %></p>
+				<form class="quantity_form" action="">
+					<input id="item_id" name="id" type="hidden" value="<%= @item.id %>">
+					<label for="">Quantity</label>
+					<select name="quantity" id="">
+						<% 1.upto(@item.quantity) do |number| %>
+							<option value="<%= number %>"><%= number%></option>
+						<% end %>
+					</select>
+					<button id="addToCart">Add to cart</button>
+				</form>
+			<% end %>
+		</div>
+	</div>
 	<div class="reviews_container">
 		<div class="reviews">
 			<ul>
@@ -60,7 +64,7 @@
 		</div>
 		<% if logged_in? %>
 			<form action="/reviews/<%= @item.id %>" method="post">
-				<textarea name="review" id="" cols="30" rows="5" placeholder="Add a review"></textarea>
+				<textarea name="review" id="" cols="50" rows="5" placeholder="Add a review"></textarea>
 				<button>Submit Review</button>
 				<label name="star1" type="radio"></label>
 				<input name="star1" type="radio">

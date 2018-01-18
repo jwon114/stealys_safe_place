@@ -1,8 +1,16 @@
 $(document).ready(function() {
 
-	// $('#cartAmount').load('/cart', function(result) {
-	// 	// console.log(result)
-	// })
+	$.ajax({
+		type: 'GET',
+		url: '/cart/amount'
+	})
+	.done(function(result) {
+		if (result > 0) {
+			$('#cartAmount').text(result)
+		} else {
+			$('#cartAmount').text("0")
+		}
+	});
 
 	$('#addToCart').on('click', function(event) {
 		// stop refresh of page after post submission on form
@@ -16,10 +24,15 @@ $(document).ready(function() {
 		})
 		.done(function(result) {
 			result = JSON.parse(result)
-			console.log(result.message);
 			if (result.message === "added to cart") {
+				$('#modalMessage').text(result.message);
 				$('#cartModal').modal('show');
 				$('#cartAmount').text(parseInt($('#cartAmount').text()) + parseInt(result.quantity));
+			}
+
+			if (result.message === "updated cart") {
+				$('#modalMessage').text(result.message);
+				$('#cartModal').modal('show');
 			}
 		});
 	});
