@@ -576,12 +576,12 @@ nav {
 .cart_buttons_container {
 	display: flex;
 	justify-content: flex-end;
-	align-content: center;
+	align-items: center;
 	margin: 20px;
 	font-size: 40px;
 }
 
-.cart_buttons_container .order_cart {
+.cart_buttons_container #updateCart {
 	margin-right: 50px;
 }
 
@@ -591,6 +591,11 @@ nav {
 
 .cart_buttons_container .order_cart button:hover {
 	background-color: lawngreen;
+	cursor: pointer;	
+}
+
+.cart_buttons_container #updateCart button:hover {
+	background-color: mistyrose;
 	cursor: pointer;	
 }
 
