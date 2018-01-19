@@ -74,7 +74,6 @@ post '/users/create' do
 		new_user = User.create(name: params[:name], email: params[:email], password: params[:password])
 		session[:user_id] = new_user.id
 		redirect '/store'
-		erb :store
 	end
 end
 
