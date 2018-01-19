@@ -39,16 +39,18 @@
 			<p><%= @item.description %></p>
 			<% if logged_in? %>
 				<p class="stock_status">Status: <%= @stock %></p>
-				<form class="quantity_form" action="">
-					<input id="item_id" name="id" type="hidden" value="<%= @item.id %>">
-					<label for="">Quantity</label>
-					<select id="quantity_select" name="quantity" id="">
-						<% 1.upto(@quantity) do |number| %>
-							<option value="<%= number %>"><%= number%></option>
-						<% end %>
-					</select>
-					<button id="addToCart">Add to cart</button>
-				</form>
+				<% if @quantity %>
+					<form class="quantity_form" action="">
+						<input id="item_id" name="id" type="hidden" value="<%= @item.id %>">
+						<label for="">Quantity</label>
+						<select id="quantity_select" name="quantity" id="">
+							<% 1.upto(@quantity) do |number| %>
+								<option value="<%= number %>"><%= number%></option>
+							<% end %>
+						</select>
+						<button id="addToCart">Add to cart</button>
+					</form>
+				<% end %>
 			<% end %>
 		</div>
 	</div>

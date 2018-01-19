@@ -27,7 +27,7 @@ helpers do
 end
 
 get '/' do
-	 
+	@cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
 	erb :index
 end
 
@@ -80,7 +80,7 @@ post '/users/create' do
 end
 
 get '/store' do
-	inventory_fetch = Inventory.all
+	inventory_fetch = Inventory.all.order(:id)
 	if inventory_fetch
 		@cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
 		@inventory_list = inventory_fetch
@@ -104,8 +104,9 @@ get '/items/:id' do
 			@stock = "In Stock"
 			if @item.quantity > MAX_ORDER
 				@quantity = MAX_ORDER
+			else
+				@quantity = @item.quantity
 			end
-			@quantity = @item.quantity
 		else
 			@stock = "Out of Stock"
 		end
@@ -120,8 +121,18 @@ end
 
 get '/cart' do
 	@cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
-	@cart_fetch = Cart.includes(:inventory).where(user_id: session[:user_id])
-	@price_total = @cart_fetch.sum(:price)
+	cart_details = Cart.includes(:inventory).where(user_id: session[:user_id])
+	@price_total = cart_details.sum(:price)
+
+	@send_to_cart = []
+	cart_details.each do |cart_item|
+		if cart_item.inventory.quantity > MAX_ORDER
+			quantity = MAX_ORDER
+		else
+			quantity = cart_item.quantity
+		end
+		@send_to_cart << { :details => cart_item, :quantity_select => quantity }
+	end
 
 	erb :cart
 end
