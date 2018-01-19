@@ -37,20 +37,18 @@
 			<h1><%= @item.name %></h1>
 			<p><%= @item.price %> Schmeckles</p>
 			<p><%= @item.description %></p>
-			<% if logged_in? %>
-				<p class="stock_status">Status: <%= @stock %></p>
-				<% if @quantity %>
-					<form class="quantity_form" action="">
-						<input id="item_id" name="id" type="hidden" value="<%= @item.id %>">
-						<label for="">Quantity</label>
-						<select id="quantity_select" name="quantity" id="">
-							<% 1.upto(@quantity) do |number| %>
-								<option value="<%= number %>"><%= number%></option>
-							<% end %>
-						</select>
-						<button id="addToCart">Add to cart</button>
-					</form>
-				<% end %>
+			<p class="stock_status">Status: <%= @stock %></p>
+			<% if @quantity %>
+				<form id="quantityForm" class="quantity_form" action="/cart/add" method="post">
+					<input id="item_id" name="id" type="hidden" value="<%= @item.id %>">
+					<label for="">Quantity</label>
+					<select id="quantity_select" name="quantity" id="">
+						<% 1.upto(@quantity) do |number| %>
+							<option value="<%= number %>"><%= number%></option>
+						<% end %>
+					</select>
+					<button id="addToCart">Add to cart</button>
+				</form>
 			<% end %>
 		</div>
 	</div>
@@ -67,8 +65,8 @@
 			</form>
 		<% end %>
 		<div class="reviews">
-			<ul>
-				<% if @reviews_list %>
+			<% if not @reviews_list.empty? %>
+				<ul>
 					<% @reviews_list.each do |record| %>
 						<li>
 							<%= record[:review_rating] %>
@@ -76,8 +74,10 @@
 							<p class="review_text"><%= record[:data].review_text %></p>
 						</li>
 					<% end %>
-				<% end %>
-			</ul>
+				</ul>
+			<% else %>
+				<h1>No reviews yet</h1>
+			<% end %>
 		</div>
 	</div>
 </div>

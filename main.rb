@@ -31,7 +31,6 @@ get '/' do
 	erb :index
 end
 
-
 post '/session' do
 	user = User.find_by(email: params[:email])
 
@@ -108,6 +107,7 @@ get '/items/:id' do
 		else
 			@stock = "Out of Stock"
 		end
+
 		erb :item
 	end
 end
@@ -138,20 +138,24 @@ end
 post '/cart/add' do
 	inventory_fetch = Inventory.find_by(id: params[:id])
 
-	# only allow adding to cart if we have the item in stock
-	if inventory_fetch.quantity >= params[:quantity].to_i
-		# if a cart entry for the user exists, show  it, otherwise create a new one
-		if cart_has_item?(session[:user_id], params[:id])
-			# pop up
-			cart_fetch = Cart.find_by(user_id: session[:user_id], inventory_id: params[:id])
-			cart_fetch.quantity = params[:quantity]
-			cart_fetch.save
-			result = JSON.generate({ message: "updated cart" })
-		else
-			new_cart = Cart.create(inventory_id: params[:id], user_id: session[:user_id], quantity: params[:quantity])
-			result = JSON.generate({ message: "added to cart", quantity: params[:quantity] })
+	if session[:user_id] != nil
+		# only allow adding to cart if we have the item in stock
+		if inventory_fetch.quantity >= params[:quantity].to_i
+			# if a cart entry for the user exists, show  it, otherwise create a new one
+			if cart_has_item?(session[:user_id], params[:id])
+				# pop up
+				cart_fetch = Cart.find_by(user_id: session[:user_id], inventory_id: params[:id])
+				cart_fetch.quantity = params[:quantity]
+				cart_fetch.save
+				result = JSON.generate({ message: "updated cart" })
+			else
+				new_cart = Cart.create(inventory_id: params[:id], user_id: session[:user_id], quantity: params[:quantity])
+				result = JSON.generate({ message: "added to cart", quantity: params[:quantity] })
+			end
+			return result
 		end
-		return result
+	else
+		return JSON.generate({ message: "user not logged in" })
 	end
 end
 

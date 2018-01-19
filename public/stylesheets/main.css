@@ -61,6 +61,10 @@ nav {
 	justify-content: flex-end;
 }
 
+.dropdown {
+	cursor: pointer;
+}
+
 .dropdown:hover {
 
 }
@@ -172,6 +176,14 @@ nav {
 
 #modalMessage, .modal_item_name {
 	text-transform: capitalize;
+}
+
+#exampleModalLabel {
+	font-size: 2em;
+}
+
+.modal-body {
+	font-size: 1.5em;
 }
 
 /*********/
