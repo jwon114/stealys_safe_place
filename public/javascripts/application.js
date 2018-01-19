@@ -1,22 +1,5 @@
 
 $(document).ready(function() {
-	
-	// console.log($('#cartAmount').text());
-	// $('.login_button').on('click', function() {
-	// 	console.log('cliked');
-	// 	$.ajax({
-	// 		type: 'GET',
-	// 		url: '/cart/amount'
-	// 	})
-	// 	.done(function(result) {
-	// 		console.log(result);
-	// 		if (result > 0) {
-	// 			$('#cartAmount').text(result)
-	// 		} else {
-	// 			$('#cartAmount').text("0")
-	// 		}
-	// 	});
-	// });
 
 	// setup star rating clickable
 	$('.starRating').rateYo({
