@@ -573,18 +573,23 @@ nav {
 	margin-right: 20px;
 }
 
-.order_cart {
+.cart_buttons_container {
 	display: flex;
 	justify-content: flex-end;
+	align-content: center;
 	margin: 20px;
 	font-size: 40px;
 }
 
-.order_cart button {
+.cart_buttons_container .order_cart {
+	margin-right: 50px;
+}
+
+.cart_buttons_container .order_cart button {
 	padding: 10px 20px;
 }
 
-.order_cart button:hover {
+.cart_buttons_container .order_cart button:hover {
 	background-color: lawngreen;
 	cursor: pointer;	
 }

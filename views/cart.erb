@@ -27,7 +27,7 @@
 				<span><%= item[:details].inventory.price %></span>
 			</div>
 			<div class="col-md-2">
-				<select name="" id="">
+				<select name="" class="quantity_select_tag">
 					<% 1.upto(item[:quantity_select]) do |number| %>
 						<option value="<%= number %>"><%= number %></option>
 					<% end %>
@@ -35,7 +35,7 @@
 			</div>
 			<div class="col-md-2">
 				<form class="cart_item_remove" action="/cart/delete" method="post">
-					<input type="hidden" name="id" value="<%= item[:details].id %>">
+					<input class="item_id" type="hidden" name="id" value="<%= item[:details].id %>">
 					<input type="hidden" name="_method" value="delete">
 					<button><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></button>
 				</form>
@@ -49,9 +49,14 @@
 			<span>Schmeckles</span>
 		</div>
 	</div>
-	<form class="order_cart" action="/order" method="post">
-		<button>Order</button>
-	</form>
+	<div class="cart_buttons_container">
+		<form class="order_cart" action="/order" method="post">
+			<button>Order</button>
+		</form>
+		<form action="/cart" id="updateCart">
+			<button>Update Cart</button>
+		</form>
+	</div>
 <% else %>
 	<div class="empty_cart_container">
 		<p class="speech-bubble">Cart is empty! Nothing to see here.</p>

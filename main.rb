@@ -121,7 +121,7 @@ end
 
 get '/cart' do
 	@cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
-	cart_details = Cart.includes(:inventory).where(user_id: session[:user_id])
+	cart_details = Cart.includes(:inventory).where(user_id: session[:user_id]).order(:id)
 	@price_total = cart_details.sum(:price)
 
 	@send_to_cart = []
@@ -129,7 +129,7 @@ get '/cart' do
 		if cart_item.inventory.quantity > MAX_ORDER
 			quantity = MAX_ORDER
 		else
-			quantity = cart_item.quantity
+			quantity = cart_item.inventory.quantity
 		end
 		@send_to_cart << { :details => cart_item, :quantity_select => quantity }
 	end
@@ -159,6 +159,17 @@ end
 
 delete '/cart/delete' do
 	Cart.delete(params[:id])
+	redirect '/cart'
+end
+
+post '/cart/update' do
+	update_quantities = params[:values]
+	update_quantities.each do |key, value|
+		id = value[0]
+		new_quantity = value[1]
+		Cart.update(id, :quantity => new_quantity)
+	end
+
 	redirect '/cart'
 end
 
