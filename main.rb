@@ -1,12 +1,12 @@
 require 'sinatra'
-# require 'sinatra/reloader'
+require 'sinatra/reloader'
 require 'json'
 require_relative 'db_config'
 require_relative 'models/inventory'
 require_relative 'models/review'
 require_relative 'models/user'
 require_relative 'models/cart'
-# require 'pry'
+require 'pry'
 
 MAX_ORDER = 10
 
@@ -55,15 +55,12 @@ delete '/session' do
 end
 
 get '/users/login' do
-	
-	if params[:email]
-		@login_message = "New user #{params[:email]} created!"
-	end
 
 	erb :login
 end
 
 get '/users/new' do
+
 	erb :users_new
 end
 
@@ -72,10 +69,12 @@ post '/users/create' do
 
 	if user
 		@login_message = "User with email already exists"
-		redirect '/users/new'
+		erb :users_new
 	else
 		new_user = User.create(name: params[:name], email: params[:email], password: params[:password])
-		redirect "/users/login?email=#{params[:email]}"
+		session[:user_id] = new_user.id
+		redirect '/store'
+		erb :store
 	end
 end
 

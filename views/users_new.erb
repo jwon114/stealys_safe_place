@@ -11,3 +11,8 @@
 	</form>
 	<img src="/images/mr_stealy.png" alt="">
 </div>
+<div class="new_user_message">
+	<% if @login_message %>
+		<h1><%= @login_message %></h1>
+	<% end %>
+</div>
