@@ -337,16 +337,20 @@ nav {
 /* NEW USER */
 /************/
 
-.new_user_header {
-	margin-top: 5%;
-	margin-left: 10.5%;
+.new_user_header.page_title {
+	margin: 0;
+	margin-bottom: 20px;
 }
 
 .new_user_container {
-	height: 50vh;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-evenly;
 	align-items: center;
+	margin-top: 60px;
+}
+
+.new_user_inner_container {
+	width: 40%;
 }
 
 .new_user_container img {
@@ -356,7 +360,6 @@ nav {
 .new_user_form {
 	display: flex;
 	flex-direction: column;
-	width: 40%;
 }
 
 .new_user_create_button {
@@ -371,7 +374,13 @@ nav {
 }
 
 .new_user_message {
-	margin-left: 10.5%;
+	display: flex;
+	justify-content: center;
+	margin-top: 80px;
+}
+
+.new_user_message h1 {
+	color: crimson;
 }
 
 /********/
