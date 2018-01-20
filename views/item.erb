@@ -39,7 +39,7 @@
 			<p><%= @item.description %></p>
 			<p class="stock_status">Status: <%= @stock %></p>
 			<% if @quantity %>
-				<form id="quantityForm" class="quantity_form" action="/cart/add" method="post">
+				<form id="quantityForm" class="quantity_form" action="">
 					<input id="item_id" name="id" type="hidden" value="<%= @item.id %>">
 					<label for="">Quantity</label>
 					<select id="quantity_select" name="quantity" id="">
@@ -76,7 +76,7 @@
 					<% end %>
 				</ul>
 			<% else %>
-				<h1>No reviews yet</h1>
+				<h1 class="no_reviews">No reviews yet</h1>
 			<% end %>
 		</div>
 	</div>

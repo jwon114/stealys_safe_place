@@ -1,0 +1,14 @@
+<h1>Order Failed</h1>
+
+<div>
+	<h2>The following items are out of stock:</h2>
+	<ul>
+		<% @cart_failed do |item| %>
+			<li><%= item.name %></li>
+		<% end %>
+	</ul>
+</div>
+
+<div>
+	<p>Remove items from cart and check again for stock status</p>
+</div>

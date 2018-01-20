@@ -4,6 +4,39 @@
 
 <h1 class="page_title">Order Success!</h1>
 
+<div class="order_summary">
+	<h2 class="order_summary_title">Order Summary</h2>
+	<div class="row cart_headers">
+		<div class="col-md-3"><span>Item</span></div>
+		<div class="col-md-3"><span>Name</span></div>
+		<div class="col-md-3"><span>Quantity</span></div>
+		<div class="col-md-3"><span>Price</span></div>
+	</div>
+	<div class="row cart_list">
+		<% @cart_items.each do |item| %>
+			<div class="col-md-3">
+				<img class="cart_image" src="<%= item.inventory.image_url %>" alt="">
+			</div>
+			<div class="col-md-3">
+				<span class="cart_item_name"><%= item.inventory.name %></span>
+			</div>
+			<div class="col-md-3">
+				<span><%= item.quantity %></span>
+			</div>
+			<div class="col-md-3">
+				<span><%= item.inventory.price %></span>
+			</div>
+		<% end %>
+	</div>
+	<div class="price_total_container">
+		<span class="total">Total:</span>
+		<div>
+			<span class="price_total"><%= @price_total %></span>
+			<span>Schmeckles</span>
+		</div>
+	</div>
+</div>
+
 <div class="success_header">
 	<img src="/images/stealy_kidnap.png" alt="">
 	<p class="speech-bubble-right">Thanks for shopping! See you next time.</p>

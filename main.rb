@@ -1,12 +1,13 @@
 require 'sinatra'
-# require 'sinatra/reloader'
+require 'sinatra/reloader'
 require 'json'
+require 'uri'
 require_relative 'db_config'
 require_relative 'models/inventory'
 require_relative 'models/review'
 require_relative 'models/user'
 require_relative 'models/cart'
-# require 'pry'
+require 'pry'
 
 MAX_ORDER = 10
 
@@ -121,6 +122,7 @@ get '/cart' do
 	@cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
 	cart_details = Cart.includes(:inventory).where(user_id: session[:user_id]).order(:id)
 	@price_total = cart_details.sum(:price)
+	@user_id = session[:user_id]
 
 	@send_to_cart = []
 	cart_details.each do |cart_item|
@@ -164,7 +166,7 @@ delete '/cart/delete' do
 	redirect '/cart'
 end
 
-post '/cart/update' do
+put '/cart/update' do
 	update_quantities = params[:values]
 	update_quantities.each do |key, value|
 		id = value[0]
@@ -172,23 +174,36 @@ post '/cart/update' do
 		Cart.update(id, :quantity => new_quantity)
 	end
 
-	redirect '/cart'
+	return JSON.generate({ message: "cart updated" })
 end
 
-post '/order' do
-	cart_items = Cart.where(user_id: session[:user_id])
-	cart_items.each do |item|
+post '/order/:user_id' do
+	@cart_items = Cart.includes(:inventory).where(user_id: params[:user_id]).order(:id)
+	# check if the item quantity in cart can be deducted from inventory
+	@cart_items_failed = []
+	@cart_items.each do |item|
 		inventory_quantity = Inventory.where(id: item.inventory_id).first.quantity
-		Inventory.update(item.inventory_id, :quantity => (inventory_quantity - item.quantity))
-		Cart.delete(item.id)
+		if inventory_quantity - item.quantity < 0
+			@cart_items_failed << item
+		end
 	end
 
-	redirect '/success'
-end
+	if @cart_items_failed.empty?
+		@price_total = @cart_items.sum(:price)
 
-get '/success' do
-	@cart_amount = 0
-	erb :order_success
+		@cart_items.each do |item|
+			inventory_quantity = Inventory.where(id: item.inventory_id).first.quantity
+			Inventory.update(item.inventory_id, :quantity => (inventory_quantity - item.quantity))
+			Cart.delete(item.id)
+		end
+
+		@cart_amount = 0
+
+		erb :order_success
+	else
+
+		erb :order_failed
+	end
 end
 
 

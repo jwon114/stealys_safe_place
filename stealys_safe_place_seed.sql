@@ -36,7 +36,7 @@ INSERT INTO inventories (name, description, price, quantity, image_url)
 VALUES ('interdimensional cable', 'A cable box that gives access to television shows across every dimension.', 125, 3, 'https://vignette.wikia.nocookie.net/rickandmorty/images/2/27/Interdimensional_Cable_Box.png/revision/latest?cb=20160910005523');
 
 INSERT INTO inventories (name, description, price, quantity, image_url)
-VALUES ('IQ enhancing helmet', 'Boosts the wearers IQ considerably. You should try it', 400, 1, 'https://vignette.wikia.nocookie.net/rickandmorty/images/9/9c/IQ_Enhancing_Helmet.png/revision/latest?cb=20160910011355');
+VALUES ('IQ enhancing helmet', 'Boosts the wearers IQ considerably.', 400, 1, 'https://vignette.wikia.nocookie.net/rickandmorty/images/9/9c/IQ_Enhancing_Helmet.png/revision/latest?cb=20160910011355');
 
 INSERT INTO inventories (name, description, price, quantity, image_url)
 VALUES ('turbulent juice', 'A multi-purpose cleaning product and nutritional supplement fluid advertised on cable channels based in dimensions other than C-137.', 80, 5, 'https://vignette.wikia.nocookie.net/rickandmorty/images/f/f5/Turbulent_Juice_Tube.png/revision/latest?cb=20160910012824');

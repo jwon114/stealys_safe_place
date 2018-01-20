@@ -64,7 +64,7 @@ $(document).ready(function() {
 	// 	}
 	// });
 
-	$('#addToCart').on('click', function(event) {
+	$('#quantityForm').on('submit', function(event) {
 		// stop refresh of page after post submission on form
 		event.preventDefault();
 		var quantity_value = $('.quantity_form select').val();
@@ -95,10 +95,9 @@ $(document).ready(function() {
 		}
 	});
 
-	$('#updateCart').on('click', function() {
+	$('#updateCart').on('submit', function() {
 		var select_array = $('.quantity_select_tag :selected');
 		var id_array = $('.item_id');
-		console.log(id_array);
 		var select_values = []
 		for (var i = 0; i < select_array.length; i++) {
 			var value_pair = [];
@@ -106,15 +105,16 @@ $(document).ready(function() {
 			value_pair[1] = select_array[i].text;
 			select_values.push(value_pair);
 		}
-		console.log(select_values);
 
 		$.ajax({
-			type: "POST",
+			type: "PUT",
 			url: "/cart/update",
 			data: { values: select_values }
 		})
 		.done(function(result) {
-			console.log(result);
+			if (result.message === "cart updated") {
+				window.location.href = "/cart"
+			}
 		})
 	})
 

@@ -53,7 +53,7 @@
 		<form action="/cart" id="updateCart">
 			<button>Update Cart</button>
 		</form>
-		<form class="order_cart" action="/order" method="post">
+		<form class="order_cart" action="/order/<%= @user_id %>" method="post">
 			<button>Order</button>
 		</form>
 	</div>
