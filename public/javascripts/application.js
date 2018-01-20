@@ -96,23 +96,29 @@ $(document).ready(function() {
 	});
 
 	$('#updateCart').on('submit', function() {
+		// event.preventDefault();
 		var select_array = $('.quantity_select_tag :selected');
 		var id_array = $('.item_id');
 		var select_values = []
 		for (var i = 0; i < select_array.length; i++) {
-			var value_pair = [];
-			value_pair[0] = id_array[i].value;
-			value_pair[1] = select_array[i].text;
-			select_values.push(value_pair);
+			// var value_pair = [];
+			// value_pair[0] = id_array[i].value;
+			// value_pair[1] = select_array[i].text;
+			// select_values.push(value_pair);
+			var item = {};
+			item["id"] = id_array[i].value;
+			item["value"] = select_array[i].text;
+			select_values.push(item);
 		}
 
 		$.ajax({
 			type: "PUT",
 			url: "/cart/update",
-			data: { values: select_values }
+			data: { select_values: JSON.stringify(select_values) }
 		})
 		.done(function(result) {
 			if (result.message === "cart updated") {
+				
 				window.location.href = "/cart"
 			}
 		})

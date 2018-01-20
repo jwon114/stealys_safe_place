@@ -167,12 +167,17 @@ delete '/cart/delete' do
 end
 
 put '/cart/update' do
-	update_quantities = params[:values]
-	update_quantities.each do |key, value|
-		id = value[0]
-		new_quantity = value[1]
-		Cart.update(id, :quantity => new_quantity)
+	# update_quantities = params[:values]
+	update_quantities = JSON.parse(params[:select_values])
+	update_quantities.each do |item|
+		# binding.pry
+		Cart.update(item["id"], :quantity => item["value"].to_i)
 	end
+	# update_quantities.each do |key, value|
+	# 	id = value[0]
+	# 	new_quantity = value[1]
+	# 	Cart.update(id, :quantity => new_quantity)
+	# end
 
 	return JSON.generate({ message: "cart updated" })
 end
