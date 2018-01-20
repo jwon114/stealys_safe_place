@@ -91,6 +91,7 @@ $(document).ready(function() {
 					cart_total += parseInt(new_quantities[item].value)
 				}
 				$('#cartAmount').text(cart_total);
+				$('.cart_message').text(result.message)
 			}
 		})
 	})

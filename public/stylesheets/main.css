@@ -614,6 +614,13 @@ nav {
 	font-size: 40px;
 }
 
+.cart_buttons_container .cart_message {
+	margin: 0;
+	margin-right: 50px;
+	color: lawngreen;
+	text-transform: capitalize;
+}
+
 .cart_buttons_container #updateCart {
 	margin-right: 50px;
 }
