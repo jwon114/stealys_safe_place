@@ -25,10 +25,14 @@ helpers do
 	def cart_has_item?(user_id, inventory_id)
 		return Cart.exists?(:inventory_id => inventory_id, :user_id => user_id)
 	end
+
+	def get_cart_amount
+		Cart.where(user_id: session[:user_id]).sum(:quantity)
+	end
 end
 
 get '/' do
-	@cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
+	# @cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
 	erb :index
 end
 
@@ -80,7 +84,7 @@ end
 get '/store' do
 	inventory_fetch = Inventory.all.order(:id)
 	if inventory_fetch
-		@cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
+		# @cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
 		@inventory_list = inventory_fetch
 		erb :store
 	end
@@ -90,7 +94,7 @@ get '/items/:id' do
 	inventory_fetch = Inventory.find_by(id: params[:id])
 	if inventory_fetch
 		# we use .includes for performance, each time we call .user it calls the db
-		@cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
+		# @cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
 		reviews_fetch = Review.includes(:user).where(inventory_id: params[:id])
 		@reviews_list = []
 		reviews_fetch.each do |review| 
@@ -119,7 +123,7 @@ post '/reviews/:id' do
 end
 
 get '/cart' do
-	@cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
+	# @cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
 	cart_details = Cart.includes(:inventory).where(user_id: session[:user_id]).order(:id)
 	@price_total = cart_details.sum(:price)
 	@user_id = session[:user_id]
@@ -167,19 +171,12 @@ delete '/cart/delete' do
 end
 
 put '/cart/update' do
-	# update_quantities = params[:values]
 	update_quantities = JSON.parse(params[:select_values])
 	update_quantities.each do |item|
-		# binding.pry
 		Cart.update(item["id"], :quantity => item["value"].to_i)
 	end
-	# update_quantities.each do |key, value|
-	# 	id = value[0]
-	# 	new_quantity = value[1]
-	# 	Cart.update(id, :quantity => new_quantity)
-	# end
 
-	return JSON.generate({ message: "cart updated" })
+	return JSON.generate({ message: "cart updated", select_values: update_quantities })
 end
 
 post '/order/:user_id' do
@@ -202,7 +199,7 @@ post '/order/:user_id' do
 			Cart.delete(item.id)
 		end
 
-		@cart_amount = 0
+		# @cart_amount = 0
 
 		erb :order_success
 	else

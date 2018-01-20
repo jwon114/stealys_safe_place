@@ -21,7 +21,7 @@
 				<span class="cart_item_name"><%= item[:details].inventory.name %></span>
 			</div>
 			<div class="col-md-2">
-				<span><%= item[:details].quantity %></span>
+				<span class="cart_item_quantity"><%= item[:details].quantity %></span>
 			</div>
 			<div class="col-md-1">
 				<span><%= item[:details].inventory.price %></span>
@@ -29,7 +29,7 @@
 			<div class="col-md-2">
 				<select name="" class="quantity_select_tag">
 					<% 1.upto(item[:quantity_select]) do |number| %>
-						<option value="<%= number %>"><%= number %></option>
+						<option selected="<%= item[:details].quantity %>" value="<%= number %>"><%= number %></option>
 					<% end %>
 				</select>
 			</div>
