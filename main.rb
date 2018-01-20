@@ -32,7 +32,7 @@ helpers do
 end
 
 get '/' do
-	# @cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
+
 	erb :index
 end
 
@@ -84,7 +84,6 @@ end
 get '/store' do
 	inventory_fetch = Inventory.all.order(:id)
 	if inventory_fetch
-		# @cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
 		@inventory_list = inventory_fetch
 		erb :store
 	end
@@ -94,7 +93,6 @@ get '/items/:id' do
 	inventory_fetch = Inventory.find_by(id: params[:id])
 	if inventory_fetch
 		# we use .includes for performance, each time we call .user it calls the db
-		# @cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
 		reviews_fetch = Review.includes(:user).where(inventory_id: params[:id])
 		@reviews_list = []
 		reviews_fetch.each do |review| 
@@ -123,7 +121,6 @@ post '/reviews/:id' do
 end
 
 get '/cart' do
-	# @cart_amount = Cart.where(user_id: session[:user_id]).sum(:quantity)
 	cart_details = Cart.includes(:inventory).where(user_id: session[:user_id]).order(:id)
 	@price_total = cart_details.sum(:price)
 	@user_id = session[:user_id]
@@ -198,8 +195,6 @@ post '/order/:user_id' do
 			Inventory.update(item.inventory_id, :quantity => (inventory_quantity - item.quantity))
 			Cart.delete(item.id)
 		end
-
-		# @cart_amount = 0
 
 		erb :order_success
 	else
