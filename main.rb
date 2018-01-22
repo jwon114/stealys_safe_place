@@ -11,6 +11,9 @@ require 'pry'
 
 MAX_ORDER = 10
 
+# TODO:
+# validations in class Models
+
 enable :sessions
 
 helpers do
@@ -69,15 +72,17 @@ get '/users/new' do
 end
 
 post '/users/create' do
-	user = User.find_by(email: params[:email])
+	new_user = User.new
+	new_user.name = params[:name]
+	new_user.email = params[:email]
+	new_user.password = params[:password]
 
-	if user
-		@login_message = "User with email already exists"
-		erb :users_new
-	else
-		new_user = User.create(name: params[:name], email: params[:email], password: params[:password])
+	if new_user.save
 		session[:user_id] = new_user.id
 		redirect '/store'
+	else
+		@login_error_messages = new_user.errors.full_messages
+		erb :users_new
 	end
 end
 

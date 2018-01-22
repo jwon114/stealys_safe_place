@@ -14,7 +14,9 @@
 	<img src="/images/mr_stealy.png" alt="">
 </div>
 <div class="new_user_message">
-	<% if @login_message %>
-		<h1><%= @login_message %></h1>
+	<% if @login_error_messages %>
+		<% @login_error_messages.each do |error| %>
+			<h1><%= error %></h1>
+		<% end %>
 	<% end %>
 </div>
